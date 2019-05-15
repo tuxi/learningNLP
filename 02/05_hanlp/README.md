@@ -1,6 +1,8 @@
-# Hanlp 在Mac OS 的 Python 环境中安装、介绍及使用
+# HanLP 在Mac OS 的 Python 环境中安装、介绍及使用
 
-#### Hanlp 介绍
+[demo链接](https://github.com/tuxi/learningNLP/tree/master/02/05_hanlp)
+
+#### HanLP 介绍
 hanlp简称汉语言处理包，它是一系列模型与算法组成的NLP工具包，由大快搜索主导并完全开源，目标是普及自然语言处理在生产环境中的应用。HanLP具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
 HanLP提供下列功能：
 - 中文分词
@@ -66,3 +68,43 @@ JVM has been shutdown
 下载完成后，将data.zip和hanlp-1.7.3-release.zip解压，并将解压后hanlp-1.7.3-release目录下的所有文件和的data放在同一个目录下，这里我新建一个hanlp_source的目录用于存放这些文件的
 - 配置文件
 hanlp的配置文件是`hanlp.properties`，配置文件的作用是告诉HanLP数据包的位置，只需修改第一行: `root=hanlp_source/`，hanlp_source必须为hanlp_source所在的路径哦。
+
+以上两个文件下载会比较慢，也可通过我的网盘[下载](https://pan.baidu.com/s/1JYpHqOO4qDGtEytH8J_0Pw)
+
+#### 错误
+
+- 错误1，JClass加载HanLP时报错:`jpype._jexception.RuntimeExceptionPyRaisable: java.lang.RuntimeException: Class com.hankcs.hanlp.HanLP not found`
+- 错误2，执行HanLP.segment()时，报错:`jpype._jexception.ExceptionInInitializerErrorPyRaisable: java.lang.ExceptionInInitializerError`
+堆栈
+```angular2html
+Traceback (most recent call last):
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 1596, in <module>
+    globals = debugger.run(setup['file'], None, None, is_module)
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/pydevd.py", line 974, in run
+    pydev_imports.execfile(file, globals, locals)  # execute the script
+  File "/Applications/PyCharm.app/Contents/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/Users/swae/Documents/Github/learningNLP/02/05_hanlp/test_hanlp.py", line 27, in <module>
+    print(HanLP.segment('你好，欢迎在Python中调用HanLP的API'))
+jpype._jexception.ExceptionInInitializerErrorPyRaisable: java.lang.ExceptionInInitializerError
+```
+
+错误1和错误2的解决方法：
+这两个问题都是因为在启动jvm时，参数`-Djava.class.path`设置错误导致，注意路径的正确性，下面为windows和linux的正常启动方法
+```angular2html
+
+    # windows下启动jvm
+    # startJVM(getDefaultJVMPath(),
+    #          "-Djava.class.path=D:\change\parsenoun\hanlp\hanlp-1.5.0.jar;D:\change\parsenoun\hanlp",
+    #          "-Xms1g",
+    #          "-Xmx1g")  # 启动JVM，Linux需替换分号;为冒号:
+
+    # mac 和 linux 下启动jvm
+    jarpath = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source/hanlp-1.7.3.jar')
+    dependency = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source')
+    # 注意： -Djava.class.path= 在Linux和mac下 jarpath和dependency需替换分号;为冒号:
+    startJVM(getDefaultJVMPath(),
+             "-Djava.class.path="+jarpath+":"+dependency,
+             "-Xms1g",
+             "-Xmx1g")
+```
