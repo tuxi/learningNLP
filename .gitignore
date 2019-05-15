@@ -105,4 +105,5 @@ venv.bak/
 
 .idea/
 
-stanford-corenlp-full-2018-10-05
+stanford-corenlp-full-2018-10-05/
+hanlp_source/
