@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+.idea/
+
+stanford-corenlp-full-2018-10-05
