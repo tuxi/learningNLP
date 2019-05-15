@@ -8,15 +8,25 @@
 import os
 
 if __name__=='__main__':
-    if os.path.exists('hanlp_source'):
+    if os.path.exists('hanlp_source') == False:
         raise FileNotFoundError('hanlp_source is not found, please download [hanlp.jar] and [data.zip] from https://github.com/hankcs/HanLP')
 
     from jpype import *
 
+    # windows下启动jvm
+    # startJVM(getDefaultJVMPath(),
+    #          "-Djava.class.path=D:\change\parsenoun\hanlp\hanlp-1.5.0.jar;D:\change\parsenoun\hanlp",
+    #          "-Xms1g",
+    #          "-Xmx1g")  # 启动JVM，Linux需替换分号;为冒号:
+
+    # mac 和 linux 下启动jvm
+    jarpath = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source/hanlp-1.7.3.jar')
+    dependency = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source')
+    # 注意： -Djava.class.path= 在Linux和mac下 jarpath和dependency需替换分号;为冒号:
     startJVM(getDefaultJVMPath(),
-             "-Djava.class.path=D:\change\parsenoun\hanlp\hanlp-1.5.0.jar;D:\change\parsenoun\hanlp",
+             "-Djava.class.path="+jarpath+":"+dependency,
              "-Xms1g",
-             "-Xmx1g")  # 启动JVM，Linux需替换分号;为冒号:
+             "-Xmx1g")
 
     print("=" * 30 + "HanLP分词" + "=" * 30)
     HanLP = JClass('com.hankcs.hanlp.HanLP')
@@ -37,7 +47,7 @@ if __name__=='__main__':
 
     print("=" * 30 + "索引分词" + "=" * 30)
     IndexTokenizer = JClass('com.hankcs.hanlp.tokenizer.IndexTokenizer')
-    termList = IndexTokenizer.segment("主副食品");
+    termList = IndexTokenizer.segment("主副食品")
     for term in termList:
         print(str(term) + " [" + str(term.offset) + ":" + str(term.offset + len(term.word)) + "]")
     print("-" * 70)
