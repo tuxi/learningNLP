@@ -8,9 +8,14 @@
 
 # 命名实体识别(NER)是自然语言处理(NLP)中的基本任务之一
 
+import os
+
 from stanfordcorenlp import StanfordCoreNLP
 
 if __name__=='__main__':
+
+    if os.path.exists('stanford-corenlp-full-2018-10-05') == False:
+        raise FileNotFoundError('stanford-corenlp-full-2018-10-05 is not found, download link: https://pan.baidu.com/s/1ep_33yssV_6wwl3SSoXxiw')
     # 设置jar包和模型的路径
     nlp = StanfordCoreNLP(path_or_host=r'stanford-corenlp-full-2018-10-05', port=9999, lang='zh')
     fin = open('news.txt', 'r', encoding='utf8')
