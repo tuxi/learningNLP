@@ -9,32 +9,15 @@ import os
 
 from jpype import *
 
+
 # hanlp简称汉语言处理包，它是一系列模型与算法组成的NLP工具包，由大快搜索主导并完全开源，目标是普及自然语言处理在生产环境中的应用。HanLP具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
 # 注意：运行此demo时，需要修改路径：-Djava.class.path和`hanlp_source/hanlp.properties`中的root
 
 if __name__=='__main__':
 
-    import extra_libs
+    from extra_libs.hanlp_source.tokenizer import start_jvm_for_hanlp
 
-    hanlp_source_dir = os.path.join(extra_libs.extra_libs_dir, 'hanlp_source')
-
-    if os.path.exists(hanlp_source_dir) == False:
-        raise FileNotFoundError('hanlp_source is not found, please download [hanlp.jar] and [data.zip] from https://github.com/hankcs/HanLP')
-
-    jarpath = os.path.join(hanlp_source_dir, 'hanlp-1.7.3.jar')
-
-    # windows下启动jvm
-    # startJVM(getDefaultJVMPath(),
-    #          "-Djava.class.path={jarpath};{dependency}".format(jarpath=jarpath, dependency=dependency),
-    #          "-Xms1g",
-    #          "-Xmx1g")  # 启动JVM，Linux需替换分号;为冒号:
-
-    # mac 和 linux 下启动jvm
-    # 注意： -Djava.class.path= 在Linux和mac下 jarpath和dependency需替换分号;为冒号:
-    startJVM(getDefaultJVMPath(),
-             "-Djava.class.path={jarpath}:{dependency}".format(jarpath=jarpath, dependency=hanlp_source_dir),
-             "-Xms1g",
-             "-Xmx1g")
+    start_jvm_for_hanlp()
 
     print("{symbol}{title}{symbol}".format(symbol="=" * 30, title="Hanlp 分词"))
     HanLP = JClass('com.hankcs.hanlp.HanLP')
