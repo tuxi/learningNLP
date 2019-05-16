@@ -7,24 +7,33 @@
 
 import os
 
+from jpype import *
+
+# hanlp简称汉语言处理包，它是一系列模型与算法组成的NLP工具包，由大快搜索主导并完全开源，目标是普及自然语言处理在生产环境中的应用。HanLP具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
+# 注意：运行此demo时，需要修改路径：-Djava.class.path和`hanlp_source/hanlp.properties`中的root
+
 if __name__=='__main__':
     if os.path.exists('hanlp_source') == False:
         raise FileNotFoundError('hanlp_source is not found, please download [hanlp.jar] and [data.zip] from https://github.com/hankcs/HanLP')
 
-    from jpype import *
+    # 获取当前py文件所在的目录的绝对路径
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 获取当前目录的父目录
+    # parent_dir = os.path.dirname(current_dir)
+
+    dependency = os.path.join(current_dir, 'hanlp_source')
+    jarpath = os.path.join(dependency, 'hanlp-1.7.3.jar')
 
     # windows下启动jvm
     # startJVM(getDefaultJVMPath(),
-    #          "-Djava.class.path=D:\change\parsenoun\hanlp\hanlp-1.5.0.jar;D:\change\parsenoun\hanlp",
+    #          "-Djava.class.path={jarpath};{dependency}".format(jarpath=jarpath, dependency=dependency),
     #          "-Xms1g",
     #          "-Xmx1g")  # 启动JVM，Linux需替换分号;为冒号:
 
     # mac 和 linux 下启动jvm
-    jarpath = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source/hanlp-1.7.3.jar')
-    dependency = os.path.join(os.path.abspath('.'), '/Users/swae/Documents/Github/learningNLP/02/05_hanlp/hanlp_source')
     # 注意： -Djava.class.path= 在Linux和mac下 jarpath和dependency需替换分号;为冒号:
     startJVM(getDefaultJVMPath(),
-             "-Djava.class.path="+jarpath+":"+dependency,
+             "-Djava.class.path={jarpath}:{dependency}".format(jarpath=jarpath, dependency=dependency),
              "-Xms1g",
              "-Xmx1g")
 
