@@ -7,6 +7,7 @@
 # @Software: PyCharm
 
 import re
+import os
 
 import jieba
 from extra_libs.hanlp_source.tokenizer import cut_hanlp
@@ -33,7 +34,8 @@ def merge_two_list(a, b):
 
 
 if __name__ == "__main__":
-    fp = open("text.txt", "r", encoding="utf8")
+    text_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'text.txt')
+    fp = open(text_path, "r", encoding="utf8")
     fout = open("result_cut.txt", "w", encoding="utf8")
     regex1 = u'(?:[^\u4e00-\u9fa5（）*&……%￥$，,。.@! ！]){1,5}期'
     regex2 = r'(?:[0-9]{1,3}[.]?[0-9]{1,3})%'
