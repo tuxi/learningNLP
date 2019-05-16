@@ -13,16 +13,15 @@ from jpype import *
 # 注意：运行此demo时，需要修改路径：-Djava.class.path和`hanlp_source/hanlp.properties`中的root
 
 if __name__=='__main__':
-    if os.path.exists('hanlp_source') == False:
+
+    import extra_libs
+
+    hanlp_source_dir = os.path.join(extra_libs.extra_libs_dir, 'hanlp_source')
+
+    if os.path.exists(hanlp_source_dir) == False:
         raise FileNotFoundError('hanlp_source is not found, please download [hanlp.jar] and [data.zip] from https://github.com/hankcs/HanLP')
 
-    # 获取当前py文件所在的目录的绝对路径
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    # 获取当前目录的父目录
-    # parent_dir = os.path.dirname(current_dir)
-
-    dependency = os.path.join(current_dir, 'hanlp_source')
-    jarpath = os.path.join(dependency, 'hanlp-1.7.3.jar')
+    jarpath = os.path.join(hanlp_source_dir, 'hanlp-1.7.3.jar')
 
     # windows下启动jvm
     # startJVM(getDefaultJVMPath(),
@@ -33,7 +32,7 @@ if __name__=='__main__':
     # mac 和 linux 下启动jvm
     # 注意： -Djava.class.path= 在Linux和mac下 jarpath和dependency需替换分号;为冒号:
     startJVM(getDefaultJVMPath(),
-             "-Djava.class.path={jarpath}:{dependency}".format(jarpath=jarpath, dependency=dependency),
+             "-Djava.class.path={jarpath}:{dependency}".format(jarpath=jarpath, dependency=hanlp_source_dir),
              "-Xms1g",
              "-Xmx1g")
 
