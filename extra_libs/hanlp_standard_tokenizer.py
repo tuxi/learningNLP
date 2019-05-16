@@ -9,6 +9,7 @@ import os, platform
 
 import jpype
 
+# 通过hanlp进行分词，配置
 
 def start_jvm_for_hanlp():
 
@@ -40,6 +41,9 @@ def to_string(sentence, return_generator=False):
     if return_generator:
         return (word_pos_item.toString().split('/') for word_pos_item in Tokenizer.segment(sentence))
     else:
+        # for word_pos_item in Tokenizer.segment(sentence):
+        #     a = word_pos_item.toString().split('/')[0]
+        #     print(a)
         return " ".join([word_pos_item.toString().split('/')[0] for word_pos_item in Tokenizer.segment(sentence)])
 
 

@@ -1,67 +1,48 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# @Time    : 2019/5/16 3:49 PM
+# @Time    : 2019/5/16 5:40 PM
 # @Author  : xiaoyuan
 # @Site    : https://github.com/tuxi
 # @File    : cut_data.py
 # @Software: PyCharm
 
 import re
-import os
 
 import jieba
 from extra_libs.hanlp_standard_tokenizer import cut_hanlp
 
-# 加载自定义的字典
-jieba.load_userdict('dict.txt')
+if __name__=='__main__':
+
+    string = '台中雨天真的很凉'
+    print("{symbol}{title}{symbol}".format(symbol="=" * 30, title="未调整字典 jieba 分词 "))
+    words = jieba.cut(string)
+    print(" ".join(words))
+    print("-" * 70)
+
+    with open('dict.txt', 'r', encoding='utf8') as fp:
+        # [jieba.suggest_freq(line.strip(), tune=True) for line in fp]
+        for line in fp:
+            # strip()
+            # 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。
+            # 注意：该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。
+            line = line.strip()
+
+            # 调整词典
+            # 使用 add_word(word, freq=None, tag=None) 和 del_word(word) 可在程序中动态修改词典。
+            # 使用 suggest_freq(segment, tune=True) 可调节单个词语的词频，使其能（或不能）被分出来。
+            # 注意：自动计算的词频在使用 HMM 新词发现功能时可能无效。
+
+            jieba.suggest_freq(line, tune=True)
+
+    # 使用jieba 分词
+    print("{symbol}{title}{symbol}".format(symbol="=" * 30, title="调整字典后 jieba 分词 "))
+    words = jieba.cut(string)
+    print(" ".join(words))
+    print("-" * 70)
 
 
-def merge_two_list(a, b):
-    c = []
-    len_a, len_b = len(a), len(b)
-    minlen = min(len_a, len_b)
-    for i in range(minlen):
-        c.append(a[i])
-        c.append(b[i])
-
-    if len_a > len_b:
-        for i in range(minlen, len_a):
-            c.append(a[i])
-    else:
-        for i in range(minlen, len_b):
-            c.append(b[i])
-    return c
-
-
-if __name__ == "__main__":
-    text_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'text.txt')
-    fp = open(text_path, "r", encoding="utf8")
-    fout = open("result_cut.txt", "w", encoding="utf8")
-    regex1 = u'(?:[^\u4e00-\u9fa5（）*&……%￥$，,。.@! ！]){1,5}期'
-    regex2 = r'(?:[0-9]{1,3}[.]?[0-9]{1,3})%'
-    p1 = re.compile(regex1)
-    p2 = re.compile(regex2)
-    for line in fp.readlines():
-        result1 = p1.findall(line)
-        if result1:
-            regex_re1 = result1
-            line = p1.sub("FLAG1", line)
-        result2 = p2.findall(line)
-        if result2:
-            line = p2.sub("FLAG2", line)
-        words = jieba.cut(line)
-        words1 = cut_hanlp(line)
-        result = " ".join(words)
-        if "FLAG1" in result:
-            result = result.split("FLAG1")
-            result = merge_two_list(result, result1)
-            result = "".join(result)
-        if "FLAG2" in result:
-            result = result.split("FLAG2")
-            result = merge_two_list(result, result2)
-            result = "".join(result)
-            # print(result)
-        fout.write(result)
-    fout.close()
-
-
+    # 使用hanlp 分词
+    print("{symbol}{title}{symbol}".format(symbol="=" * 30, title="使用hanlp 分词"))
+    words = cut_hanlp(string)
+    print(words)
+    print("-" * 70)
