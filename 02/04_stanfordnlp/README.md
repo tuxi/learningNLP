@@ -8,7 +8,9 @@
 - 1.一个集成的语言分析工具集; 
 - 2.进行快速，可靠的任意文本分析; 
 - 3.整体的高质量的文本分析; 
-- 4.支持多种主流语言; - 5.多种编程语言的易用接口; - 6.方便的简单的部署web服务。
+- 4.支持多种主流语言; 
+- 5.多种编程语言的易用接口; 
+- 6.方便的简单的部署web服务。
 
 ##### 可参考官网链接：
 
@@ -101,5 +103,5 @@ psutil.AccessDenied: psutil.AccessDenied (pid=14621)
 if self.port in [conn.laddr[1] for conn in psutil.net_connections()]:
    raise IOError('Port ' + str(self.port) + ' is already in use.')
 ```
-并在初始化`StanfordCoreNLP`，指定port端口
+并在初始化`StanfordCoreNLP`时，指定port端口
 最后重新执行`python ner.py`即可。
