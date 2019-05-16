@@ -10,7 +10,7 @@ import re
 import os
 
 import jieba
-from extra_libs.hanlp_source.tokenizer import cut_hanlp
+from extra_libs.hanlp_standard_tokenizer import cut_hanlp
 
 # 加载自定义的字典
 jieba.load_userdict('dict.txt')

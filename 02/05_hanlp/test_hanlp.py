@@ -5,8 +5,6 @@
 # @File    : test_hanlp.py
 # @Software: PyCharm
 
-import os
-
 from jpype import *
 
 
@@ -15,7 +13,7 @@ from jpype import *
 
 if __name__=='__main__':
 
-    from extra_libs.hanlp_source.tokenizer import start_jvm_for_hanlp
+    from extra_libs.hanlp_standard_tokenizer import start_jvm_for_hanlp
 
     start_jvm_for_hanlp()
 

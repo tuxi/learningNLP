@@ -9,7 +9,7 @@
 import re
 
 import jieba
-from extra_libs.hanlp_source.tokenizer import cut_hanlp
+from extra_libs.hanlp_standard_tokenizer import cut_hanlp
 
 if __name__=='__main__':
 
