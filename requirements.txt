@@ -1,3 +1,5 @@
 jieba==0.39
 stanfordcorenlp
 jpype1
+numpy
+nltk
