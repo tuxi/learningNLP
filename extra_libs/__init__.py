@@ -9,6 +9,7 @@
 import os, shutil
 
 extra_libs_dir = os.path.dirname(os.path.abspath(__file__))
+stanfordcorenlp_dir = os.path.join(extra_libs_dir, 'stanford-corenlp-full-2018-10-05')
 
 def move_resume_nouns():
     '''

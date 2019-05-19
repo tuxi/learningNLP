@@ -22,7 +22,7 @@ def get_stanford_ner_nodes(parent):
                 org=org+" "+''.join([i[0]  for i in node])
             elif node.label() == 'LOCATION': 
                 loc=loc+" "+''.join([i[0]  for i in node])
-    if len(num)>0 or len(date)>0 or len(org)>0  or len(loc)>0 :
+    if len(date)>0 or len(org)>0  or len(loc)>0 :
         return {'date':date,'org':org,'loc':loc}    
     else:
         return {}
