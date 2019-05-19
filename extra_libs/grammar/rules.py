@@ -30,6 +30,7 @@ def grammer_parse(raw_sentence=None,file_object=None):
     #assert grammer_type in set(['hanlp_keep','stanford_ner_drop','stanford_pos_drop'])
     if len(raw_sentence.strip())<1:
         return False
+    # 定义一个字典，key为stanford_ner_drop，value是一种语法规则
     grammer_dict=\
     {
     
@@ -42,7 +43,8 @@ def grammer_parse(raw_sentence=None,file_object=None):
         LOCATION:{<LOCATION|STATE_OR_PROVINCE|CITY|COUNTRY>+}
         """     
     }
-    
+
+    # 解析语法
     stanford_ner_drop_rp = nltk.RegexpParser(grammer_dict['stanford_ner_drop'])
     try :
         stanford_ner_drop_result = stanford_ner_drop_rp.parse(ner_stanford(raw_sentence) )

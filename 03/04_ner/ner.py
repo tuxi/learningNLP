@@ -5,6 +5,8 @@
 # @File    : ner.py
 # @Software: PyCharm
 
+# 使用stanfordcorenlp进行命名实体识别
+
 from extra_libs.grammar.rules import grammer_parse
 
 if __name__=='__main__':
