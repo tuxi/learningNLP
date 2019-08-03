@@ -45,9 +45,13 @@ def start_jvm_for_hanlp():
 #         #     print(a)
 #         return " ".join([word_pos_item.toString().split('/')[0] for word_pos_item in Tokenizer.segment(sentence)])
 
-def to_string(sentence,return_generator=False):
+def getStandardTokenizer():
     start_jvm_for_hanlp()
     Tokenizer = jpype.JClass('com.hankcs.hanlp.tokenizer.StandardTokenizer')
+    return Tokenizer
+
+def to_string(sentence,return_generator=False):
+    Tokenizer = getStandardTokenizer()
     if return_generator:
         return (word_pos_item.toString().split('/') for word_pos_item in Tokenizer.segment(sentence))
     else:
@@ -71,6 +75,7 @@ def seg_sentences(sentence,with_filter=True,return_generator=False):
         g = [word_pos_pair[0] for word_pos_pair in segs if len(word_pos_pair)==2 and word_pos_pair[0]!=' ']
     return iter(g) if return_generator else g
 
+# 切词
 def cut_hanlp(raw_sentence, return_list=True):
     if len(raw_sentence.strip()) > 0:
         return to_string(raw_sentence) if return_list else iter(to_string(raw_sentence))

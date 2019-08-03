@@ -3,3 +3,4 @@ stanfordcorenlp
 jpype1
 numpy
 nltk
+sklearn
