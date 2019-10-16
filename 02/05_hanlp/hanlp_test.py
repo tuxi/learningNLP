@@ -2,14 +2,14 @@
 # @Time    : 2019/5/15 11:57 PM
 # @Author  : alpface
 # @Email   : xiaoyuan1314@me.com
-# @File    : test_hanlp.py
+# @File    : hanlp_test.py
 # @Software: PyCharm
 
 from jpype import *
 
 
 # hanlp简称汉语言处理包，它是一系列模型与算法组成的NLP工具包，由大快搜索主导并完全开源，目标是普及自然语言处理在生产环境中的应用。HanLP具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
-# 注意：运行此demo时，需要修改路径：-Djava.class.path和`hanlp_source/hanlp.properties`中的root
+# 注意：运行此demo时，需要修改路径：-Djava.class.path和`hanlp_source/hanlp.properties`中的root路径(实际上将其修改为hanlp_source的绝对路径)
 
 if __name__=='__main__':
 

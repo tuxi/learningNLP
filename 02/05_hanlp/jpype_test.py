@@ -2,7 +2,7 @@
 # @Time    : 2019/5/15 11:38 PM
 # @Author  : alpface
 # @Email   : xiaoyuan1314@me.com
-# @File    : test_jpype.py
+# @File    : jpype_test.py
 # @Software: PyCharm
 
 import jpype
