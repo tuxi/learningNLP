@@ -18,7 +18,13 @@ def move_resume_nouns():
     :return:
     '''
     src_path = os.path.join(extra_libs_dir, 'resume_nouns.txt')
-    dst_path = os.path.join(extra_libs_dir, 'hanlp_source/data/dictionary/custom/resume_nouns.txt')
+    dst_dir = extra_libs_dir+"/hanlp_source/data/dictionary/"
+    dst_path = os.path.join(dst_dir, 'custom/resume_nouns.txt')
+    if os.path.exists(dst_dir) == False:
+        raise FileNotFoundError(
+            '{path} is not found, download link: https://pan.baidu.com/s/1ep_33yssV_6wwl3SSoXxiw'.format(
+                path=dst_dir))
+
     if os.path.exists(dst_path) == True:
         print("%s be exist" % dst_path)
         return

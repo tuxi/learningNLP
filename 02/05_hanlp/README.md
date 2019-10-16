@@ -72,7 +72,7 @@ hanlp的配置文件是`hanlp.properties`，配置文件的作用是告诉HanLP�
 以上两个文件下载会比较慢，也可通过我的网盘[下载](https://pan.baidu.com/s/1JYpHqOO4qDGtEytH8J_0Pw)
 
 demo 和 hanlp_source 的目录结构图
-![屏幕快照 2019-05-16 上午1.06.53.png](https://blog.mmbbn.cn/2019/5/Loxa2Yjd7ZrLDP9sSVDGGYF4XuoJjEsSzBbYvTLmTr0jiem8PPs6jhQ5ey32r1Hp)
+![屏幕快照 2019-05-16 上午1.06.53.png](https://static.objc.com/2019/5/Loxa2Yjd7ZrLDP9sSVDGGYF4XuoJjEsSzBbYvTLmTr0jiem8PPs6jhQ5ey32r1Hp)
 
 
 #### 错误
